@@ -1,0 +1,14 @@
+[Unit]
+Description=Photobooth running on boot
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/david/photobooth/venv/bin/python /home/david/photobooth/photobooth_main.py
+User=david
+WorkingDirectory=/home/david/photobooth
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

@@ -11,13 +11,13 @@ import threading
 BRIGHTNESS = 1.5   # 1.0 = normal, 1.3–1.7 works well for thermal printers
 CONTRAST   = 1.6
 
-# Initialize camera ONCE at startup
+# Initialize camera at startup
 picam = Picamera2()
 config = picam.create_still_configuration(main={"size": (1640, 1232)})
 picam.configure(config)
 picam.start()
 
-# Initialize Printer ONCE
+# Initialize Printer
 printer = Usb(0x1FC9, 0x2016)
 
 # make print lock
