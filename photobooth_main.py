@@ -1,6 +1,6 @@
 import sys
 sys.stdout.reconfigure(line_buffering=True)
-sys.stdderr.reconfigure(line_buffering=True)
+sys.stderr.reconfigure(line_buffering=True)
 
 from PIL import Image, ImageEnhance
 from datetime import datetime
