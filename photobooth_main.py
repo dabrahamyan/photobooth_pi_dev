@@ -146,7 +146,7 @@ def take_photo_and_print():
         try:
             printer.image(template)
             printer.cut()
-            print("Photo printed! Ready for next person.")
+            print("Bogos binted! Ready for next person.")
         except Exception as e:
             print(f"Print failed - check paper/printer: {e}")
 
