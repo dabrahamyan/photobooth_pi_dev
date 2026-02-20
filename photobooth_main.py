@@ -88,6 +88,11 @@ def take_photo_and_print():
         # Capture photo
         photo_file = capture_photo()
 
+        # Try to upload photo and get QR code
+        qr = upload_and_show_qr(photo_file)
+        
+        qr = qr.resize((110, 120))
+
         # Open template and photo w/ error handling
         try:
             template = Image.open("junkyard_template.png")
@@ -105,8 +110,9 @@ def take_photo_and_print():
         # Resize photo
         pic = pic.resize((550, 480))
 
-        # Paste
+        # Paste stuff
         template.paste(pic, (10, 145))
+        template.past(qr, (250, 650))
 
         # Grayscale first
         template = template.convert("L")
