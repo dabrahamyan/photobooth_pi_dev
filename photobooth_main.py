@@ -36,7 +36,7 @@ printing_lock = threading.Lock()
 
 API_URL = "https://booth-api.lucas.tools/api/v1/upload"
 API_KEY = "BC60806019AA489B94BDBF8DAB008829"
-EVENT_ID = ""
+EVENT_ID = "market_2_20"
 
 def upload_and_show_qr(photo_path: str):
     try:
