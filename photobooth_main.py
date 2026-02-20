@@ -46,7 +46,8 @@ def get_printer():
     # Tries to connect to printer and returns None if its not available
     try:
         return Usb(0x1FC9, 0x2016)
-    except:
+    except Exception as e:
+        print(f"Printer connection failed: {e}")
         return None
 
 def take_photo_and_print():

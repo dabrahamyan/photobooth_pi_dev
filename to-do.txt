@@ -8,7 +8,20 @@ create error handling for connection issues if me and lucas not there
 Prioritize:
 Make pi run on its own ------------
 Error handling for if it cannot connect to wifi/hotspot
+        (error handling doesn't work too well but thats ok were at least somewhere)
+        and it seems like taking pictures works alright anyways
+        this does not include troubleshooting for connection
+        doesn't seem like it matters if it connects or not
 
 debug issue of a bunch of photos being printed at once
 
 make separate QR codes for each print
+
+TO-DO tomorrow:
+1. test whether it still works if wifi is fully off 
+    then if so --> make version where there is no QR code section.
+    This can be a branch off the main, just to switch to in case
+    separate QR codes/ connection error handling is not made in time
+
+2. Make separate QR code stuff
+3. Make error handling for connection
