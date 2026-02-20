@@ -112,7 +112,7 @@ def take_photo_and_print():
 
         # Paste stuff
         template.paste(pic, (10, 145))
-        template.past(qr, (250, 650))
+        template.paste(qr, (250, 650))
 
         # Grayscale first
         template = template.convert("L")
