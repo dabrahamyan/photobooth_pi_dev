@@ -91,7 +91,7 @@ def take_photo_and_print():
         # Try to upload photo and get QR code
         qr = upload_and_show_qr(photo_file)
         if qr:
-            qr = qr.resize((180, 180))
+            qr = qr.resize((200, 200))
 
         # Open template and photo w/ error handling
         try:
@@ -117,7 +117,7 @@ def take_photo_and_print():
         # Paste stuff
         if qr:
             template.paste(pic, (10, 145))
-            template.paste(qr, (210, 720))
+            template.paste(qr, (190, 740))
         else:
             template.paste(pic, (10, 145))
 
