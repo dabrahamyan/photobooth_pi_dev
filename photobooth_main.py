@@ -90,7 +90,6 @@ def take_photo_and_print():
 
         # Try to upload photo and get QR code
         qr = upload_and_show_qr(photo_file)
-        qr = None
         if qr:
             qr = qr.resize((220, 220))
 
@@ -132,9 +131,6 @@ def take_photo_and_print():
 
         # Convert to pure black & white
         template = template.convert("1")
-
-        # saving to debug when this happens
-        template.save("/home/david/photobooth/debug_output.png")
 
         # Try to find printer if we don't have one
         global printer
