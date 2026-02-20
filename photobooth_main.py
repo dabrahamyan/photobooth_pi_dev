@@ -18,17 +18,32 @@ picam.configure(config)
 picam.start()
 
 # Initialize Printer
-printer = Usb(0x1FC9, 0x2016)
+try:
+    printer = Usb(0x1FC9, 0x2016)
+    print("Printer initialized successfully")
+except Exception as e:
+    print(f"WARNING: Printer not found: {e}")
+    printer = None
 
 # make print lock
 printing_lock = threading.Lock()
 
 def capture_photo():
-    """Capture a photo using the already-running camera"""
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"photos/photo_{timestamp}.jpg"
-    picam.capture_file(filename)
-    return filename
+    try:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"photos/photo_{timestamp}.jpg"
+        picam.capture_file(filename)
+        return filename
+    except Exception as e:
+        print(f"Camera error: {e}")
+        return None
+    
+def get_printer():
+    # Tries to connect to printer and returns None if its not available
+    try:
+        return Usb(0x1FC9, 0x2016)
+    except:
+        return None
 
 def take_photo_and_print():
     # check if already printing
@@ -43,8 +58,13 @@ def take_photo_and_print():
         # Capture photo
         photo_file = capture_photo()
 
-        # Open template and photo
-        template = Image.open("junkyard_template.png")
+        # Open template and photo w/ error handling
+        try:
+            template = Image.open("junkyard_template.png")
+        except FileNotFoundError:
+            print("Template not found! Using blank background")
+            template = Image.new('RGB', (576, 800), color='white')
+        
         pic = Image.open(photo_file)
 
         # Resize template
@@ -67,6 +87,16 @@ def take_photo_and_print():
 
         # Convert to pure black & white
         template = template.convert("1")
+
+        # Try to find printer if we don't have one
+        global printer
+        if printer is None:
+            print("Trying to reconnect to printer...")
+            printer = get_printer()
+
+        if printer is None:
+            print("Printer still not available - photo saved but not printed")
+            return
 
         # Print
         try:

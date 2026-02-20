@@ -6,7 +6,7 @@ make separate QR codes for each print
 create error handling for connection issues if me and lucas not there
 
 Prioritize:
-Make pi run on its own
+Make pi run on its own ------------
 Error handling for if it cannot connect to wifi/hotspot
 
 debug issue of a bunch of photos being printed at once
