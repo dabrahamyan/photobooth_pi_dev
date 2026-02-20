@@ -105,7 +105,6 @@ def take_photo_and_print():
             template = Image.new('RGB', (576, 800), color='white')
         
         pic = Image.open(photo_file)
-        pic = pic.convert("RGB") # added to try to fox inversion esc bug on non qr prints
 
         # Resize template
         width = 576
@@ -115,6 +114,10 @@ def take_photo_and_print():
         # Resize photo
         pic = pic.resize((550, 480))
 
+        # Grayscale first
+        template = template.convert("L")
+        pic = pic.convert("L")
+
         # Paste stuff
         if qr:
             template.paste(pic, (10, 145))
@@ -122,9 +125,6 @@ def take_photo_and_print():
         else:
             template.paste(pic, (10, 145))
 
-
-        # Grayscale first
-        template = template.convert("L")
 
         # Brighten for printing
         template = ImageEnhance.Brightness(template).enhance(BRIGHTNESS)
