@@ -25,3 +25,11 @@ TO-DO tomorrow:
 
 2. Make separate QR code stuff
 3. Make error handling for connection
+    lines 92-94 --> if qr (make sure qr exists) then ---
+    also same thing on line 115 -----
+    on line 98 I could have if qr then use original qr code template, else use one without the qr code section ----
+
+4. add "QR code expires after a week"
+
+5. final stress test
+    run regularly without wifi

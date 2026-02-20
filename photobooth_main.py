@@ -90,12 +90,16 @@ def take_photo_and_print():
 
         # Try to upload photo and get QR code
         qr = upload_and_show_qr(photo_file)
-        
-        qr = qr.resize((110, 120))
+        if qr:
+            qr = qr.resize((180, 180))
 
         # Open template and photo w/ error handling
         try:
-            template = Image.open("junkyard_template.png")
+            if qr:
+                template = Image.open("junkyard_template.png")
+            else:
+                #FIXME -- new template
+                template = Image.open("junkyard_template.png")
         except FileNotFoundError:
             print("Template not found! Using blank background")
             template = Image.new('RGB', (576, 800), color='white')
@@ -111,8 +115,12 @@ def take_photo_and_print():
         pic = pic.resize((550, 480))
 
         # Paste stuff
-        template.paste(pic, (10, 145))
-        template.paste(qr, (250, 650))
+        if qr:
+            template.paste(pic, (10, 145))
+            template.paste(qr, (210, 720))
+        else:
+            template.paste(pic, (10, 145))
+
 
         # Grayscale first
         template = template.convert("L")
