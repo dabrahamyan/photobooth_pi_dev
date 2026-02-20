@@ -90,6 +90,7 @@ def take_photo_and_print():
 
         # Try to upload photo and get QR code
         qr = upload_and_show_qr(photo_file)
+        qr = None
         if qr:
             qr = qr.resize((220, 220))
 
@@ -104,6 +105,7 @@ def take_photo_and_print():
             template = Image.new('RGB', (576, 800), color='white')
         
         pic = Image.open(photo_file)
+        pic = pic.convert("RGB") # added to try to fox inversion esc bug on non qr prints
 
         # Resize template
         width = 576
@@ -130,6 +132,9 @@ def take_photo_and_print():
 
         # Convert to pure black & white
         template = template.convert("1")
+
+        # saving to debug when this happens
+        template.save("/home/david/photobooth/debug_output.png")
 
         # Try to find printer if we don't have one
         global printer
