@@ -98,8 +98,7 @@ def take_photo_and_print():
             if qr:
                 template = Image.open("junkyard_template.png")
             else:
-                #FIXME -- new template
-                template = Image.open("junkyard_template.png")
+                template = Image.open("template_no_qr.png")
         except FileNotFoundError:
             print("Template not found! Using blank background")
             template = Image.new('RGB', (576, 800), color='white')
