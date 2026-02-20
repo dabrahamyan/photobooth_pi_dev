@@ -10,6 +10,8 @@ from escpos.printer import Usb
 from gpiozero import Button
 from signal import pause
 import threading
+import requests
+import qrcode
 
 # IMAGE SETTINGS
 BRIGHTNESS = 1.5   # 1.0 = normal, 1.3–1.7 works well for thermal printers
@@ -31,6 +33,29 @@ except Exception as e:
 
 # make print lock
 printing_lock = threading.Lock()
+
+API_URL = "https://booth-api.lucas.tools/api/v1/upload"
+API_KEY = "BC60806019AA489B94BDBF8DAB008829"
+EVENT_ID = ""
+
+def upload_and_show_qr(photo_path: str):
+    try:
+        with open(photo_path, "rb") as f:
+            res = requests.post(
+                API_URL,
+                headers={"Authorization": f"Bearer {API_KEY}"},
+                files={"file": (photo_path, f, "image/jpeg")},
+                data={"event_id": EVENT_ID},
+                timeout=10,
+            )
+        res.raise_for_status()
+        url = res.json()["url"]
+    except Exception:
+        return None
+
+    qr = qrcode.make(url)
+
+    return qr
 
 def capture_photo():
     try:
