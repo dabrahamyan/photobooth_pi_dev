@@ -111,7 +111,7 @@ def take_photo_and_print():
         template = template.resize((width, height))
 
         # Resize photo
-        pic = pic.resize((550, 480))
+        pic = pic.resize((550, 412))
 
         # Grayscale first
         template = template.convert("L")
