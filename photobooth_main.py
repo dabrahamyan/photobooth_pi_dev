@@ -150,9 +150,18 @@ def take_photo_and_print():
         except Exception as e:
             print(f"Print failed - check paper/printer: {e}")
 
-# Set up button
 button = Button(24)
-button.when_pressed = take_photo_and_print
+while True:
+    if button.is_pressed:
+        take_photo_and_print()
 
-print("Photobooth ready! Press button to take photo.")
-pause()
+        print("Photobooth ready! Press button to take photo.")
+
+
+
+# Set up button
+# button = Button(24)
+# button.when_pressed = take_photo_and_print
+
+# print("Photobooth ready! Press button to take photo.")
+# pause()
