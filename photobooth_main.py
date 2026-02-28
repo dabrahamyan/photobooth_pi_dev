@@ -96,7 +96,7 @@ def take_photo_and_print():
         # Open template and photo w/ error handling
         try:
             if qr:
-                template = Image.open("junkyard_template.png")
+                template = Image.open("receipt_design_2.png")
             else:
                 template = Image.open("template_no_qr.png")
         except FileNotFoundError:
