@@ -130,7 +130,7 @@ def take_photo_and_print():
         template = ImageEnhance.Contrast(template).enhance(CONTRAST)
 
         # Convert to pure black & white
-        template = template.convert("1")
+        template = template.convert("1", dither=Image.FLOYDSTEINBERG)
 
         # Try to find printer if we don't have one
         global printer
