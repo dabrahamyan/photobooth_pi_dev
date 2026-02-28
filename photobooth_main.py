@@ -120,7 +120,7 @@ def take_photo_and_print():
         # Paste stuff
         if qr:
             template.paste(pic, (10, 180))
-            template.paste(qr, (185, 730))
+            template.paste(qr, (185, 690))
         else:
             template.paste(pic, (10, 145))
 
