@@ -14,8 +14,8 @@ import requests
 import qrcode
 
 # IMAGE SETTINGS
-BRIGHTNESS = 1.5   # 1.0 = normal, 1.3–1.7 works well for thermal printers
-CONTRAST   = 1.6
+BRIGHTNESS = 2.0   # 1.0 = normal, 1.3–1.7 works well for thermal printers
+CONTRAST   = 1.2
 
 # Initialize camera at startup
 picam = Picamera2()
