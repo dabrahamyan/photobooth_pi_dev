@@ -14,8 +14,8 @@ import requests
 import qrcode
 
 # IMAGE SETTINGS
-BRIGHTNESS = 2.0   # 1.0 = normal, 1.3–1.7 works well for thermal printers
-CONTRAST   = 1.2
+BRIGHTNESS = 1.5   # 1.0 = normal, 1.3–1.7 works well for thermal printers
+CONTRAST   = 1.6
 
 # Initialize camera at startup
 picam = Picamera2()
@@ -38,24 +38,6 @@ API_URL = "https://booth-api.lucas.tools/api/v1/upload"
 API_KEY = "BC60806019AA489B94BDBF8DAB008829"
 EVENT_ID = "market_2_20"
 
-def upload_and_show_qr(photo_path: str):
-    try:
-        with open(photo_path, "rb") as f:
-            res = requests.post(
-                API_URL,
-                headers={"Authorization": f"Bearer {API_KEY}"},
-                files={"file": (photo_path, f, "image/jpeg")},
-                data={"event_id": EVENT_ID},
-                timeout=10,
-            )
-        res.raise_for_status()
-        url = res.json()["url"]
-    except Exception:
-        return None
-
-    qr = qrcode.make(url)
-
-    return qr
 
 def capture_photo():
     try:
@@ -88,17 +70,10 @@ def take_photo_and_print():
         # Capture photo
         photo_file = capture_photo()
 
-        # Try to upload photo and get QR code
-        qr = upload_and_show_qr(photo_file)
-        if qr:
-            qr = qr.resize((220, 220))
 
         # Open template and photo w/ error handling
         try:
-            if qr:
-                template = Image.open("receipt_design_2.png")
-            else:
-                template = Image.open("template_no_qr.png")
+            template = Image.open("template_ParkerSt.jpg")
         except FileNotFoundError:
             print("Template not found! Using blank background")
             template = Image.new('RGB', (576, 800), color='white')
@@ -117,12 +92,8 @@ def take_photo_and_print():
         template = template.convert("L")
         pic = pic.convert("L")
 
-        # Paste stuff
-        if qr:
-            template.paste(pic, (10, 180))
-            template.paste(qr, (185, 690))
-        else:
-            template.paste(pic, (10, 145))
+        # Paste pic
+        template.paste(pic, (10, 145))
 
 
         # Brighten for printing
