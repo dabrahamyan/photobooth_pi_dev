@@ -93,7 +93,7 @@ def take_photo_and_print():
         pic = pic.convert("L")
 
         # Paste pic
-        template.paste(pic, (10, 145))
+        template.paste(pic, (10, 300))
 
 
         # Brighten for printing
